@@ -16,12 +16,15 @@ public class AccountTypeRestController {
     @GetMapping
     public BaseRest<?> findAll(){
         var accountTypeDtoList = accountTypeService.findAll();
+        System.out.println("================================");
         return BaseRest.builder()
                 .status(true)
                 .code(HttpStatus.OK.value())
                 .message("Web")
                 .data(accountTypeDtoList)
+
                 .build();
+
 
     }
 
