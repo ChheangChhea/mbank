@@ -17,20 +17,46 @@ import java.time.LocalDateTime;
 @RequestMapping( "/api/v1/users")
 public class UserRestController {
     private final UserService userService;
-//================================
+//===============================================
+
+//    @PutMapping("/{id}")
+//    public BaseRest<?>updateUserById(@PathVariable("id") Integer id,@RequestBody UpdateUserDto updateUserDto){
+//        UserDto userDto = userService.updateUserById(id, updateUserDto);
+//
+//        return BaseRest.builder()
+//                .status(true)
+//                .code(HttpStatus.OK.value())
+//                .message("User has been disabled successfully.kjkjk")
+//                .timestamp(LocalDateTime.now())
+//                .data(userDto)
+//                .build();
+//    }
     @PutMapping("/{id}")
+    public BaseRest<?> updateUserById(@PathVariable("id") Integer id,@RequestBody UpdateUserDto updateUserDto){
+        UserDto userDto = userService.updateUserById(id, updateUserDto);
+        return BaseRest.builder()
+                .status(true)
+                .code(HttpStatus.OK.value())
+                .message("User has been disabled successfully.jghvhgv ")
+                .timestamp(LocalDateTime.now())
+                .data(userDto)
+                .build();
+    }
+//======================= Update ==================================
+
+    @PutMapping("/{id}/is-deleted")
     public BaseRest<?> updateIsDeletedStatusById(@PathVariable Integer id,@RequestBody IsDeletedDto dto ){
-        Integer deleteId = userService.updateIsDeletedStatusById(id, dto.status());
+        Integer deletedId = userService.updateIsDeletedStatusById(id, dto.status());
         return BaseRest.builder()
                 .status(true)
                 .code(HttpStatus.OK.value())
                 .message("User has been disabled successfully.")
                 .timestamp(LocalDateTime.now())
-                .data(deleteId)
+                .data(deletedId)
                 .build();
     }
 
-//==================================
+//=================== Delete =============================
     @DeleteMapping("/{id}")
     public BaseRest<?> deleteUserById(@PathVariable Integer id){
        Integer deleteId = userService.deleteUserById(id);
@@ -43,6 +69,21 @@ public class UserRestController {
                 .build();
     }
 
+    //=====================================
+    @GetMapping
+    public BaseRest<?>findAllUsers(@RequestParam(name = "page",required = false,defaultValue = "1") int page,
+                                   @RequestParam(name = "limit",required = false,defaultValue = "20") int limit
+                                   ){
+
+        return BaseRest.builder()
+                .status(true)
+                .code(HttpStatus.OK.value())
+                .message("User has been found successfully.")
+                .timestamp(LocalDateTime.now())
+                .data(userService.page(page, limit))
+                .build();
+    }
+    //=====================================
     @GetMapping("/{id}")
     public BaseRest<?> findUserById(@PathVariable Integer id){
         UserDto userDto=userService.findUserById(id);
@@ -54,6 +95,7 @@ public class UserRestController {
                 .build();
     }
 
+    //=====================================
     @PostMapping
     public BaseRest<?> createNewUser(@RequestBody  @Valid CreateUserDto createUserDto){
        UserDto user = userService.createNewUser(createUserDto);
