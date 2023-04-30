@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -35,9 +37,7 @@ public class UserServiceImpl implements UserService {
                         String.format("User with %d is not found", id)));
 
         return userMapStruct.userToUserDto(user);
-
     }
-
     //=====================================================
     @Override
     public PageInfo<UserDto> page(int page, int limit) {
@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService {
                 .doSelectPageInfo(userMapper::select);
         return userMapStruct.userPageInfotoUserDtoPageInfo(userPageInfo);
     }
-
     //======================= Delete ==============================
     @Override
     public Integer deleteUserById(Integer id) {
@@ -83,6 +82,40 @@ public class UserServiceImpl implements UserService {
                 String.format("User with %d is not found", id));
 
     }
+
+    @Override
+    public List<UserDto> userSearchName(UserDtoSearchName userDtoSearchName) {
+
+        return null;
+    }
+
+//    @Override
+//    public List<UserDto> userSearchName(UserDtoSearchName userDtoSearchName) {
+////        if(userMapper.searchUserName()){
+////            return userMapStruct.fro(userSearchName(userMapper.searchUserName(userDtoSearchName)));
+////        }else {
+////            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+////                    String.format("User with name %s is not found",userDtoSearchName));
+////        }
+////
+////    }
+
+//    @Override
+//    public UserDto findUserByName(String name) {
+//        User search;
+//        if (userMapper.existsById(search)) {
+//            search = userMapStruct.findUserByName(updateUserDto);
+//            search.setId(name);
+//            userMapper.findUserByName(search);
+//            return this.findUserByName(search);
+//        }
+//        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+//                String.format("User with %s is not found", search));
+//
+//    }
+    //==================Search==============================
+
+
 }
 
 //    ======================================

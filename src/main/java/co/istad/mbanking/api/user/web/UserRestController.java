@@ -43,7 +43,6 @@ public class UserRestController {
                 .build();
     }
 //======================= Update ==================================
-
     @PutMapping("/{id}/is-deleted")
     public BaseRest<?> updateIsDeletedStatusById(@PathVariable Integer id,@RequestBody IsDeletedDto dto ){
         Integer deletedId = userService.updateIsDeletedStatusById(id, dto.status());
@@ -55,6 +54,18 @@ public class UserRestController {
                 .data(deletedId)
                 .build();
     }
+//====================Search-====================
+//    @PutMapping("/{id}/search")
+//    public BaseRest<?> findUserByName(@PathVariable"name" String name ){
+//        Integer searchName = userService.updateIsDeletedStatusById(name);
+//        return BaseRest.builder()
+//                .status(true)
+//                .code(HttpStatus.OK.value())
+//                .message("User has been disabled successfully.")
+//                .timestamp(LocalDateTime.now())
+//                .data(searchName)
+//                .build();
+//    }
 
 //=================== Delete =============================
     @DeleteMapping("/{id}")
@@ -106,5 +117,7 @@ public class UserRestController {
                 .data(user)
                 .build();
     }
+
+    //=================== Search ==================
 
 }

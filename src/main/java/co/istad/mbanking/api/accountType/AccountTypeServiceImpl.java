@@ -20,4 +20,17 @@ public class AccountTypeServiceImpl implements AccountTypeService{
 
         return accountTypeMapStruct.toDo(accountTypes);
     }
+    @Override
+    public AccountType insert(AccountTypeDto accountDto) {
+    accountTypeMapper.insert(accountDto);
+        return null;
+    }
+
+    @Override
+    public Integer deleted(Integer id) {
+      accountTypeMapper.delete(id);
+        return id;
+    }
+
+
 }
