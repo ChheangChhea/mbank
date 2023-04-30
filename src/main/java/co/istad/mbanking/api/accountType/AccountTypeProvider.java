@@ -1,4 +1,4 @@
-package co.istad.mbanking.api.accounttype;
+package co.istad.mbanking.api.accountType;
 
 import org.apache.ibatis.jdbc.SQL;
 

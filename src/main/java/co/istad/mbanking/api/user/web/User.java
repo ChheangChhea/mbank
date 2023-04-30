@@ -16,5 +16,4 @@ public class User {
     private Boolean isStudent;
     private Boolean isDelete;
 
-
 }

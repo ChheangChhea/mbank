@@ -1,7 +1,6 @@
-package co.istad.mbanking.api.accounttype;
+package co.istad.mbanking.api.accountType;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Repository;
 

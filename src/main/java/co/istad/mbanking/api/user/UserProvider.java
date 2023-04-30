@@ -4,7 +4,8 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class UserProvider {
 
-    private static final String tableName="users";
+    private static final String tableName ="users";
+
     public String buildInsertSql(){
         return new SQL(){{
             INSERT_INTO(tableName);
@@ -15,8 +16,15 @@ public class UserProvider {
             VALUES("is_student","#{u.isStudent}");
             VALUES("is_deleted","FALSE");
         }}.toString();
-
-
+    }
+    //====================== Update ============================
+    public String buildUpdateByIdSql(){
+        return new SQL(){{
+            UPDATE(tableName);
+            SET("name = #{u.name}");
+            SET("gender = #{u.gender}");
+            WHERE("id = #{u.id}");
+        }}.toString();
     }
 //=======================================================
 
@@ -24,9 +32,10 @@ public String buildSelectByIdSql(){
     return new SQL(){{
         SELECT("*");
         FROM(tableName);
-        WHERE("id = #{id}");
+        WHERE("id=#{id}");
     }}.toString();
 }
+    //==================== Delete ===================================
     public String buildDeleteByIdSql(){
         return new SQL(){{
             DELETE_FROM(tableName);
@@ -39,11 +48,21 @@ public String buildSelectByIdSql(){
         return new SQL() {{
             UPDATE(tableName);
             SET("is_deleted = #{status}");
-
             WHERE("id = #{id}");
         }}.toString();
 //
 
     }
+    public String buildSelectSql(){
+        return new SQL(){{
+            SELECT("*");
+            FROM("users");
+            WHERE("is_deleted=FALSE");
+            ORDER_BY("id DESC");
+        }
+
+        }.toString();
+    }
 }
+
 //}
