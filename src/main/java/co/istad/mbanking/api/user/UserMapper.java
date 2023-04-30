@@ -3,6 +3,7 @@ package co.istad.mbanking.api.user;
 import co.istad.mbanking.api.user.web.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,5 +41,10 @@ public interface UserMapper {
 
        @UpdateProvider(type = UserProvider.class , method = "buildUpdateByIdSql")
        void updateById(@Param("u") User user);
+
+       //=================Name ================
+//    @SelectProvider(type = UserProvider.class,method = "searchName");
+//    @ResultMap(("userResultMap") )
+//    List<User>searchUserName(@PathVariable String name);
 
 }

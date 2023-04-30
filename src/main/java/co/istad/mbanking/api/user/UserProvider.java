@@ -63,6 +63,16 @@ public String buildSelectByIdSql(){
 
         }.toString();
     }
+//=======================================
+    public String buildSearch(){
+        return new SQL(){{
+            SELECT("*");
+            FROM(tableName);
+            WHERE("name = #{name}");
+            LIMIT("name =#{name}");
+            ORDER_BY("name ");
+        }}.toString();
+    }
 }
 
 //}
