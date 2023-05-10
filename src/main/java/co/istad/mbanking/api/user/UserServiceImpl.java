@@ -38,11 +38,21 @@ public class UserServiceImpl implements UserService {
 
         return userMapStruct.userToUserDto(user);
     }
+
+    @Override
+    public UserDto findUserByStudentCardId(String studentCardId) {
+        User user = userMapper.selectByStudentCardId(studentCardId).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        String.format("User with %s is not found", studentCardId)));
+
+        return userMapStruct.userToUserDto(user);
+    }
+
     //=====================================================
     @Override
-    public PageInfo<UserDto> page(int page, int limit) {
+    public PageInfo<UserDto> findAllUsers(int page, int limit ,String name) {
         PageInfo<User>userPageInfo= PageHelper.startPage(page,limit)
-                .doSelectPageInfo(userMapper::select);
+                .doSelectPageInfo(() ->userMapper.select(name));
         return userMapStruct.userPageInfotoUserDtoPageInfo(userPageInfo);
     }
     //======================= Delete ==============================

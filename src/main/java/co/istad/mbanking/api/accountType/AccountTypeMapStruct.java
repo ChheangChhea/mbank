@@ -11,6 +11,11 @@ import java.util.List;
 public interface AccountTypeMapStruct {
 
 List<AccountTypeDto> toDo(List<AccountType>model);
-    List<AccountTypeDto> toDtoList(List<AccountType> model);
-    AccountTypeDto toDto(AccountType model);
+//    List<AccountTypeDto> toDtoList(List<AccountType> model);
+   // AccountTypeDto toDto(AccountType model);
+
+
+
+    //===========================
+    AccountTypeDto toAccountTypeDto(AccountType model);
 }

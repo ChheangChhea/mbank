@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 import static net.sf.jsqlparser.parser.feature.Feature.delete;
 
 @RestController
@@ -26,15 +28,15 @@ public class AccountTypeRestController {
                 .build();
     }
     //=================Add User Type============================
-    @PostMapping("/add")
-    public BaseRest<?>insert(@RequestBody AccountTypeDto accountType){
-        return BaseRest.builder()
-                .status(true)
-                .code(HttpStatus.OK.value())
-                .message("Add successfully")
-                .data(accountTypeService.insert(accountType))
-                .build();
-        }
+//    @PostMapping("/add")
+//    public BaseRest<?>insert(@RequestBody AccountTypeDto accountType){
+//        return BaseRest.builder()
+//                .status(true)
+//                .code(HttpStatus.OK.value())
+//                .message("Add successfully")
+//                .data(accountTypeService.insert(accountType))
+//                .build();
+//        }
 
     @DeleteMapping("/{id}")
     public BaseRest<?>delete(@PathVariable Integer id){
@@ -44,6 +46,21 @@ public class AccountTypeRestController {
                 .code(HttpStatus.OK.value())
                 .message("Add successfully")
                 .data(id)
+                .build();
+    }
+
+
+
+
+    @GetMapping("/{id}")
+    public BaseRest<?> findById(@PathVariable Integer id) {
+        var accountType = accountTypeService.findById(id);
+        return BaseRest.builder()
+                .status(true)
+                .code(HttpStatus.OK.value())
+                .message("Account type has been found")
+                .timestamp(LocalDateTime.now())
+                .data(accountType)
                 .build();
     }
     }

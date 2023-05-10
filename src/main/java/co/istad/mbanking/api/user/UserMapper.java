@@ -21,14 +21,20 @@ public interface UserMapper {
              @Result(column = "student_card_id", property = "studentCardId"),
             @Result(column = "is_student", property = "isStudent")
          })
+
           Optional<User> selectById(@Param("id") Integer id);
+
+          @SelectProvider(type =UserProvider.class,method = "buildSelectByStudentCardIdSql")
+          @ResultMap("userResultMap")
+
+         Optional<User> selectByStudentCardId(@Param("studentCardId") String studentCardId);
 
         @Select("SELECT EXISTS(SELECT * FROM users WHERE id =#{id})")
          boolean existsById(@Param("id") Integer id);
 
         @SelectProvider(value = UserProvider.class, method = "buildSelectSql")
         @ResultMap(("userResultMap") )
-        List<User> select();
+        List<User> select(@Param("name") String name);
 
     @DeleteProvider(type = UserProvider.class,method = "buildDeleteByIdSql")
         void deleteById(@Param("id")Integer id);

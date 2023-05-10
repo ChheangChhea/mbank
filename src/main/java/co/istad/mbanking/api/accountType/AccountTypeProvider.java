@@ -25,4 +25,12 @@ public class AccountTypeProvider {
                 WHERE("id= #{id}");
         }}.toString();
     }
+
+    public String buildSelectByIdSql() {
+        return new SQL() {{
+            SELECT("*");
+            FROM("account_types");
+            WHERE("id = #{id}");
+        }}.toString();
+    }
 }

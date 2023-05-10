@@ -83,21 +83,45 @@ public class UserRestController {
     //=====================================
     @GetMapping
     public BaseRest<?>findAllUsers(@RequestParam(name = "page",required = false,defaultValue = "1") int page,
-                                   @RequestParam(name = "limit",required = false,defaultValue = "20") int limit
-                                   ){
+                                   @RequestParam(name = "limit",required = false,defaultValue = "20") int limit,
+                                   @RequestParam(name = "name",required = false,defaultValue = "") String name
+
+                                 ){
 
         return BaseRest.builder()
                 .status(true)
                 .code(HttpStatus.OK.value())
                 .message("User has been found successfully.")
                 .timestamp(LocalDateTime.now())
-                .data(userService.page(page, limit))
+                .data(userService.findAllUsers(page, limit ,name))
                 .build();
     }
     //=====================================
-    @GetMapping("/{id}")
-    public BaseRest<?> findUserById(@PathVariable Integer id){
-        UserDto userDto=userService.findUserById(id);
+    @GetMapping("/{identifier}")
+    public BaseRest<?> findUserById(@PathVariable("identifier") String identifier){
+
+        UserDto userDto;
+        /*
+       if(identifier instanceof  String studentCardID){
+
+            userDto = userService.findUserByStudentCardId(studentCardID);
+        } else if (identifier instanceof  Integer id) {
+
+          userDto=  userService.findUserById(id);
+
+        } else {
+            userDto=null;
+        }
+
+       */
+         try{
+            Integer id = Integer.parseInt(identifier);
+            userDto = userService.findUserById(id);
+        }catch (NumberFormatException e){
+            userDto =userService.findUserByStudentCardId(identifier);
+        }
+
+
         return BaseRest.builder()
                 .status(true)
                 .code(HttpStatus.OK.value())
@@ -105,7 +129,12 @@ public class UserRestController {
                 .data(userDto)
                 .build();
     }
-
+//    @GetMapping("/{student-card-id}")
+//    public BaseRest<?>findUserByStudentCardId(@PathVariable("student-card-id") String studentCardId){
+//        log.info("{ }",studentCardId);
+//        return null;
+//
+//    }
     //=====================================
     @PostMapping
     public BaseRest<?> createNewUser(@RequestBody  @Valid CreateUserDto createUserDto){

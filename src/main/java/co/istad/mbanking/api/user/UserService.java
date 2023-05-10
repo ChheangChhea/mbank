@@ -13,8 +13,9 @@ UserDto createNewUser(CreateUserDto createUserDto);
 //=====================================
 UserDto findUserById(Integer id);
 
+UserDto findUserByStudentCardId(String studentCardId);
 //===============Page Gination================
-    PageInfo<UserDto>page(int page,int limit);
+    PageInfo<UserDto>findAllUsers(int page,int limit,String name);
 
 Integer deleteUserById(Integer id );
 

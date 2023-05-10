@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 @Repository
@@ -22,4 +23,8 @@ public interface AccountTypeMapper {
 
     @DeleteProvider(type = AccountTypeProvider.class,method = "buildDeleteAccountType")
     void delete(@Param("id")Integer id);
+
+//============================================
+    @SelectProvider(type = AccountTypeProvider.class, method = "buildSelectByIdSql")
+    Optional<AccountType> selectById(@Param("id") Integer id);
 }

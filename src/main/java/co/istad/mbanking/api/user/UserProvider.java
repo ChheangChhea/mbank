@@ -32,7 +32,7 @@ public String buildSelectByIdSql(){
     return new SQL(){{
         SELECT("*");
         FROM(tableName);
-        WHERE("id=#{id}");
+        WHERE("id=#{id}","is_deleted=FALSE");
     }}.toString();
 }
     //==================== Delete ===================================
@@ -57,7 +57,7 @@ public String buildSelectByIdSql(){
         return new SQL(){{
             SELECT("*");
             FROM("users");
-            WHERE("is_deleted=FALSE");
+            WHERE("name ILIKE '%' || #{name} || '%'","is_deleted=FALSE");
             ORDER_BY("id DESC");
         }
 
@@ -72,6 +72,14 @@ public String buildSelectByIdSql(){
             LIMIT("name =#{name}");
             ORDER_BY("name ");
         }}.toString();
+    }
+    public String buildSelectByStudentCardIdSql(){
+
+            return new SQL(){{
+                SELECT("*");
+                FROM(tableName);
+                WHERE("student_card_id = #{studentCardId}","is_deleted=FALSE");
+            }}.toString();
     }
 }
 
