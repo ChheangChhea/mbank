@@ -6,7 +6,7 @@ public interface AccountTypeService {
 
     List<AccountTypeDto> findAll();
 
-    AccountType insert(AccountTypeDto accountTypeDto);
+//    AccountType insert(AccountTypeDto accountTypeDto);
 
 //    AccountTypeDto delete(AccountTypeDto accountTypeDto);
      Integer deleted(Integer id);
