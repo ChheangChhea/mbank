@@ -28,15 +28,15 @@ public class AccountTypeRestController {
                 .build();
     }
     //=================Add User Type============================
-//    @PostMapping("/add")
-//    public BaseRest<?>insert(@RequestBody AccountTypeDto accountType){
-//        return BaseRest.builder()
-//                .status(true)
-//                .code(HttpStatus.OK.value())
-//                .message("Add successfully")
-//                .data(accountTypeService.insert(accountType))
-//                .build();
-//        }
+    @PostMapping("/add")
+    public BaseRest<?>insert(@RequestBody AccountTypeDto accountType){
+        return BaseRest.builder()
+                .status(true)
+                .code(HttpStatus.OK.value())
+                .message("Add successfully")
+                .data(accountTypeService.insert(accountType))
+                .build();
+        }
 
     @DeleteMapping("/{id}")
     public BaseRest<?>delete(@PathVariable Integer id){
