@@ -16,4 +16,10 @@ public class User {
     private Boolean isStudent;
     private Boolean isDelete;
 
+    //Auth
+    private String email;
+    private String password;
+    private Boolean isVerified;
+    private String verifiedCode;
+
 }

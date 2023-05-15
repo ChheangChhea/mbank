@@ -19,18 +19,6 @@ public class UserRestController {
     private final UserService userService;
 //===============================================
 
-//    @PutMapping("/{id}")
-//    public BaseRest<?>updateUserById(@PathVariable("id") Integer id,@RequestBody UpdateUserDto updateUserDto){
-//        UserDto userDto = userService.updateUserById(id, updateUserDto);
-//
-//        return BaseRest.builder()
-//                .status(true)
-//                .code(HttpStatus.OK.value())
-//                .message("User has been disabled successfully.kjkjk")
-//                .timestamp(LocalDateTime.now())
-//                .data(userDto)
-//                .build();
-//    }
     @PutMapping("/{id}")
     public BaseRest<?> updateUserById(@PathVariable("id") Integer id,@RequestBody UpdateUserDto updateUserDto){
         UserDto userDto = userService.updateUserById(id, updateUserDto);
@@ -54,18 +42,6 @@ public class UserRestController {
                 .data(deletedId)
                 .build();
     }
-//====================Search-====================
-//    @PutMapping("/{id}/search")
-//    public BaseRest<?> findUserByName(@PathVariable"name" String name ){
-//        Integer searchName = userService.updateIsDeletedStatusById(name);
-//        return BaseRest.builder()
-//                .status(true)
-//                .code(HttpStatus.OK.value())
-//                .message("User has been disabled successfully.")
-//                .timestamp(LocalDateTime.now())
-//                .data(searchName)
-//                .build();
-//    }
 
 //=================== Delete =============================
     @DeleteMapping("/{id}")
@@ -101,19 +77,7 @@ public class UserRestController {
     public BaseRest<?> findUserById(@PathVariable("identifier") String identifier){
 
         UserDto userDto;
-        /*
-       if(identifier instanceof  String studentCardID){
 
-            userDto = userService.findUserByStudentCardId(studentCardID);
-        } else if (identifier instanceof  Integer id) {
-
-          userDto=  userService.findUserById(id);
-
-        } else {
-            userDto=null;
-        }
-
-       */
          try{
             Integer id = Integer.parseInt(identifier);
             userDto = userService.findUserById(id);
@@ -129,12 +93,7 @@ public class UserRestController {
                 .data(userDto)
                 .build();
     }
-//    @GetMapping("/{student-card-id}")
-//    public BaseRest<?>findUserByStudentCardId(@PathVariable("student-card-id") String studentCardId){
-//        log.info("{ }",studentCardId);
-//        return null;
-//
-//    }
+
     //=====================================
     @PostMapping
     public BaseRest<?> createNewUser(@RequestBody  @Valid CreateUserDto createUserDto){

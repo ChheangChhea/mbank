@@ -11,8 +11,5 @@ public interface AccountTypeService {
 //    AccountTypeDto delete(AccountTypeDto accountTypeDto);
      Integer deleted(Integer id);
 
-
-
-
     AccountTypeDto findById(Integer id);
 }

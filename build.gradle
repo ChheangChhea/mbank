@@ -19,21 +19,27 @@ repositories {
 }
 
 dependencies {
-    //security
+    // Template Engine
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    // https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter
+
+    // Pagination
     implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
 
-    //Config Mapstruct with lombok
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding
+    // Config mapstruct with lombok
     implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
-    // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    // https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor
-    annotationProcessor'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
