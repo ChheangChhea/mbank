@@ -1,12 +1,17 @@
 package co.istad.mbanking.api.user.web;
 
+import co.istad.mbanking.api.user.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class User {
     private Integer id;
     private String name;
@@ -21,5 +26,9 @@ public class User {
     private String password;
     private Boolean isVerified;
     private String verifiedCode;
+
+    // User has roles
+    private List<Role> roles;
+
 
 }

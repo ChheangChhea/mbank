@@ -23,5 +23,5 @@ public interface UserMapStruct {
 //=====================Search=============================
 List<UserDto>fro(List<User>users);
 
-User registerDtoToUser(RegisterDto registerDto);
+    User fromRegisterDtoToUser(RegisterDto registerDto);
 }

@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+    //Password Validator
+    implementation group: 'org.passay', name: 'passay', version: '1.6.3'
     // Template Engine
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 

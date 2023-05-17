@@ -1,32 +1,4 @@
 
-Skip to content
-Product
-Solutions
-Open Source
-Pricing
-Search
-Sign in
-Sign up
-CheatSetha
-/
-mobile-banking-api
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-mobile-banking-api/src/main/resources/templates/auth/verify.html
-@CheatSetha
-CheatSetha verify done
-Latest commit 95cc186 3 days ago
-History
-1 contributor
-496 lines (445 sloc)  13.7 KB
-
-
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -299,10 +271,10 @@ History
 	vertical-align: top;
     border: none !important;
 ">
-            <img class="carpool_logo" src="https://w0.peakpx.com/wallpaper/45/495/HD-wallpaper-tzuyu-twice-thumbnail.jpg"
-                 style="	display: block;
-	margin: 0 auto;
-margin: 30px auto;" width="232">
+<!--            <img class="carpool_logo" src="https://w0.peakpx.com/wallpaper/45/495/HD-wallpaper-tzuyu-twice-thumbnail.jpg"-->
+<!--                 style="	display: block;-->
+<!--	margin: 0 auto;-->
+<!--margin: 30px auto;" width="232">-->
         </td>
     </tr>
     <!-- Header -->
@@ -344,7 +316,8 @@ padding: 0 35px 40px;">
                         <p class="near_title last" style="margin-top: 10px;margin-bottom: 0;">Please verify that your
                             email address is hello@SmilesDavis.yeah, and that you entered it when signing up for Waze
                             Carpool.</p>
-                        <a href="#" style="	display: block;
+                        <a th:href="@{http://localhost:15000/api/v1/auth/check-verify(email=${data.email},verifiedCode=${data.verifiedCode})}" class="buttonText"
+                           href="#" style="	display: block;
 	width: 100%;
 	max-width: 300px;
 	background: #20DA9C;
@@ -419,77 +392,7 @@ padding-top: 20px !important;"></td>
 	background: #fff;
 ">
                 <tbody>
-                <tr>
-                    <td class="footer_like" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-	vertical-align: top;
-    border: none !important;
-background: #1FD99A; "><img alt="" class="img_section"
-                            src="https://carpool-email-assets.s3.amazonaws.com/shared/footer@2x.png"
-                            style="	display: block;
-	margin: 0 auto;
-	width: 100%;
-	max-width: 500px;
-" width="500"></td>
-                </tr>
-                <tr>
-                    <td class="footer" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-	vertical-align: top;
-    border: none !important;
-	padding: 0 20px 30px;
-	background: #1FD99A;
-">
-                        <table border="0" cellpadding="0" cellspacing="0" class="footer_content" style="	font-size: 15px;
-	line-height: 23px;
-	max-width: 500px;
-	min-width: 460px;
-	text-align: center;
-	width: 100%;
-	font-size: 12px;
-	line-height: initial;
-	color: #005750;
-">
-                            <tbody>
-                            <tr>
-                                <td style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-	vertical-align: top;
-    border: none !important;
-" width="33%">
-                                    <img class="footer_item_image"
-                                         src="https://carpool-email-assets.s3.amazonaws.com/shared/footer-learn@2x.png"
-                                         style="	display: block;
-	margin: 0 auto;
-margin: 0 auto 10px;" width="24">
-                                    <p class="footer_item_caption" style="margin: 0 auto;">More about <br><a
-                                            href="http://waze.com/carpool/index.html" style="	color: #005750;
-" target="_blank">Waze Carpool</a></p>
-                                </td>
-                                <td style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-	vertical-align: top;
-    border: none !important;
-" width="33%">
-                                    <img class="footer_item_image"
-                                         src="https://carpool-email-assets.s3.amazonaws.com/shared/footer-support@2x.png"
-                                         style="	display: block;
-	margin: 0 auto;
-margin: 0 auto 10px;" width="24">
-                                    <p class="footer_item_caption" style="margin: 0 auto;">Questions? <br><a
-                                            href="https://support.google.com/waze/carpool" style="	color: #005750;
-" target="_blank">We're here</a>
-                                    </p></td>
-                                <td style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-	vertical-align: top;
-    border: none !important;
-" width="33%">
-                                    <img class="footer_item_image"
-                                         src="https://carpool-email-assets.s3.amazonaws.com/shared/footer-fb@2x.png"
-                                         style="	display: block;
-	margin: 0 auto;
-margin: 0 auto 10px;" width="24">
-                                    <p class="footer_item_caption" style="margin: 0 auto;">Join the community <br><a
-                                            href="https://www.facebook.com/groups/wazecarpoolers" style="	color: #005750;
-" target="_blank">on Facebook</a></p>
-                                </td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </td>
@@ -504,19 +407,19 @@ margin: 0 auto 10px;" width="24">
 	vertical-align: top;
     border: none !important;
 ">
-            <p class="footer_legal" style="	padding: 20px 0 40px;
-	margin: 0;
-	font-size: 12px;
-	color: #A5A5A5;
-	line-height: 1.5;
-">
-                If you did not enter this email address when signing up for Waze Carpool service, disregard this
-                message.<br><br>
-                © 2017 Google Inc. 1600 Amphitheatre Parkway, Mountain View, CA 94043
-                <br><br>
+<!--            <p class="footer_legal" style="	padding: 20px 0 40px;-->
+<!--	margin: 0;-->
+<!--	font-size: 12px;-->
+<!--	color: #A5A5A5;-->
+<!--	line-height: 1.5;-->
+<!--">-->
+<!--                If you did not enter this email address when signing up for Waze Carpool service, disregard this-->
+<!--                message.<br><br>-->
+<!--                © 2017 Google Inc. 1600 Amphitheatre Parkway, Mountain View, CA 94043-->
+<!--                <br><br>-->
 
-                This is a mandatory service email from Waze Carpool.
-            </p>
+<!--                This is a mandatory service email from Waze Carpool.-->
+<!--            </p>-->
         </td>
     </tr>
     </tbody>
