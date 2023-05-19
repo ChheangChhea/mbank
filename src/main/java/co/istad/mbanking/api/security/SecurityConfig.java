@@ -66,13 +66,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable());
-
+        http.csrf(AbstractHttpConfigurer::disable);
         // Authorize URL mapping
         http.authorizeHttpRequests(request -> {
             request.requestMatchers("/api/v1/auth/**").permitAll();
             request.requestMatchers(HttpMethod.GET,"/api/v1/users/**").hasRole("ADMIN");
             request.requestMatchers(HttpMethod.POST,"/api/v1/users/**").hasRole("SYSTEM");
-            request.requestMatchers("/api/v1/account-types/**", "/api/v1/files/**").hasAnyRole("CUSTOMER", "SYSTEM");
+            request.requestMatchers(HttpMethod.POST,"/api/v1/account-types/**", "/api/v1/files/**").hasAnyRole("CUSTOMER", "SYSTEM");
             request.anyRequest().authenticated();
         });
 

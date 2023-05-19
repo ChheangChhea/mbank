@@ -49,13 +49,6 @@ public String buildCreateUserRoleSql() {
             WHERE("email = #{email}");
         }}.toString();
     }
-//    public String buildUpdateVerified(){
-//        return new SQL() {{
-//            UPDATE("users");
-//            SET("verified_code = #{verifiedCode}");
-//            WHERE("email = #{email}");
-//        }}.toString();
-//    }
 
     public String buildLoadUserRolesSql() {
         return new SQL() {{
@@ -65,7 +58,6 @@ public String buildCreateUserRoleSql() {
             WHERE("ur.user_id = #{userId}");
         }}.toString();
     }
-
 }
 
 

@@ -1,4 +1,4 @@
-package co.istad.mbanking.api.user.validator;
+package co.istad.mbanking.api.user.validator.role;
 
 import co.istad.mbanking.api.user.UserMapper;
 import jakarta.validation.ConstraintValidator;
@@ -13,8 +13,8 @@ public class RoleIdConstraintValidation implements ConstraintValidator<RoleIdCon
 
     @Override
     public boolean isValid(List<Integer> roleIds, ConstraintValidatorContext context) {
-        for (Integer role : roleIds) {
-            if (userMapper.existByRoleId(role)) {
+        for (Integer roleId : roleIds) {
+            if (!userMapper.checkRoleId(roleId)) {
                 return false;
             }
         }

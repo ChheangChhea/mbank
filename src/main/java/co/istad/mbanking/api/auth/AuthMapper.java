@@ -41,8 +41,6 @@ public interface AuthMapper {
     @ResultMap("authResultMap")
     Optional<User> selectByEmailAndVerifiedCode(@Param("email") String email, @Param("verifiedCode") String verifiedCode);
 
-//   @UpdateProvider(type = AuthProvider.class,method = "buildUpdateVerified")
-//   void verify(@Param("email") String email , @Param("verifiedCode") String verifiedCode);
 
     @UpdateProvider(type = AuthProvider.class, method = "buildUpdateVerifiedCodeSQL")
     boolean updateVerifiedCode(@Param("email") String email, @Param("verifiedCode") String verifiedCode);

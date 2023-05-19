@@ -1,5 +1,7 @@
 package co.istad.mbanking.api.auth;
 
+import co.istad.mbanking.api.auth.web.AuthDto;
+import co.istad.mbanking.api.auth.web.LogInDto;
 import co.istad.mbanking.api.auth.web.RegisterDto;
 import co.istad.mbanking.api.user.UserMapStruct;
 import co.istad.mbanking.api.user.web.User;
@@ -9,11 +11,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Base64;
 import java.util.UUID;
 @Transactional
 
@@ -25,6 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserMapStruct userMapStruct;
     private final PasswordEncoder encoder;
     private final MailUtil mailUtil;
+    private final DaoAuthenticationProvider daoAuthenticationProvider;
 
     @Value("{spring.mail.username}")
     private String appMail;
@@ -81,8 +88,22 @@ public class AuthServiceImpl implements AuthService {
         System.out.println("uer : "+user);
         if (!user.getIsVerified()) {
             authMapper.updateVerifiedCode(email,verifiedCode);
-//            authMapper.verify(email, verifiedCode);
+          // authMapper.verify(email, verifiedCode);
         }
 
+    }
+
+    @Override
+    public AuthDto login(LogInDto logInDto) {
+        Authentication authentication=new UsernamePasswordAuthenticationToken(logInDto.email(),logInDto.password());
+       authentication= daoAuthenticationProvider.authenticate(authentication);
+       log.info("authentication{ }",authentication);
+       log.info("authentication{ }",authentication.getName());
+       log.info("authentication{ }",authentication.getCredentials());
+
+       String basicAuthFormat= authentication.getName() +":"+authentication.getCredentials();
+       String encoding =Base64.getEncoder().encodeToString(basicAuthFormat.getBytes());
+        log.info("Basic {}",encoding);
+        return new AuthDto(String.format("Basic %s",encoding));
     }
 }

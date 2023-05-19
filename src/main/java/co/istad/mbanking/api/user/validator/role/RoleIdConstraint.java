@@ -1,5 +1,7 @@
-package co.istad.mbanking.api.user.validator;
+package co.istad.mbanking.api.user.validator.role;
 
+
+import co.istad.mbanking.api.user.validator.role.RoleIdConstraintValidation;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -8,11 +10,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy =EmailUniqueConstraintValidator.class)
+@Constraint(validatedBy = RoleIdConstraintValidation.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD})
-public @interface EmailUnique {
-    String message() default "Email is already exists ! ";
+public @interface RoleIdConstraint {
+    String message() default "role id not exist ";
 
     Class<?>[] groups() default { };
 

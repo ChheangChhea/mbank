@@ -1,4 +1,4 @@
-package co.istad.mbanking.api.user.validator;
+package co.istad.mbanking.api.user.validator.email;
 
 import co.istad.mbanking.api.user.UserMapper;
 import jakarta.validation.ConstraintValidator;
@@ -10,6 +10,7 @@ public class EmailUniqueConstraintValidator implements ConstraintValidator<Email
     private final UserMapper userMapper;
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
+
         return !userMapper.existByEmail(email);
     }
 }

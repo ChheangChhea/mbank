@@ -1,11 +1,10 @@
-package co.istad.mbanking.api.auth;
+package co.istad.mbanking.api.auth.web;
 
-import co.istad.mbanking.api.auth.web.RegisterDto;
+import co.istad.mbanking.api.auth.AuthService;
 import co.istad.mbanking.base.BaseRest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.ap.internal.util.IgnoreJRERequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +18,27 @@ public class AuthRestController {
 
 
     private  final AuthService authService;
+
+
+    //====================Login================
+    @PostMapping("/login")
+    public BaseRest<?>login(@Valid @RequestBody LogInDto loginDto){
+
+        AuthDto authDto=authService.login(loginDto);
+        return BaseRest.builder()
+                .status(true)
+                .code(HttpStatus.OK.value())
+                .message("YOU have Been login Success ")
+                .timestamp(LocalDateTime.now())
+                .data(authDto)
+                .build();
+
+
+
+
+    }
+
+    //==================== Register ================
     @PostMapping ("/register")
     public BaseRest<?> register(@Valid @RequestBody RegisterDto registerDto ){
       //Call service
@@ -34,6 +54,8 @@ public class AuthRestController {
 
 
     }
+
+    //==================== Verify ================
     @PostMapping("/verify")
     public BaseRest<?>verify(@RequestParam String email){
         authService.verify(email);
@@ -47,6 +69,7 @@ public class AuthRestController {
                 .build();
     }
 
+    //====================Check Verify ================
     @GetMapping("/check-verify")
     public BaseRest<?> checkVerify(@RequestParam String email,
                                    @RequestParam String verifiedCode){
